@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>The Django Shop</title>
+</head>
+<body>
+
+    <a href="{% url 'index' %}"><h1>The Django Shop</h1></a>
+
+    {% if user.is_authenticated %}
+        {{ user.username }}
+        <a href="{% url 'logout' %}">Déconnexion</a>
+    {% else %}
+        <a href="{% url 'signup' %}">Inscription</a>
+        <a href="{% url 'login' %}">Connexion</a>
+    {% endif %}
+
+    {% if user.cart %}
+        <a href="{% url 'cart' %}">Voir le panier ({{ user.cart.orders.count }})</a>
+        <a href="{% url 'delete-cart' %}">Vider le panier</a>
+    {% endif %}
+
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
